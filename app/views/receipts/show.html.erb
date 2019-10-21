@@ -1,0 +1,64 @@
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/"><h5>Vietnamese Menonite Church</h5></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+  </button>
+      <div class="collapse navbar-collapse " id="navbarNav">
+          <ul class="navbar-nav ">
+              <li class="nav-item ">
+                  <a class="nav-link" href="/">Home </a>
+              </li>
+              <li class="nav-item ">
+                  <a class="nav-link" href="/members">Member</a>
+              </li>
+              <li class="nav-item active mr-5">
+                  <a class="nav-link" href="/receipts">Receipts</a>
+              </li>
+
+              <li class="nav-item">
+                  <%if signed_in?%>
+                  <%= button_to "Sign out", sign_out_path, method: :delete, class: "btn btn-secondary"%>
+                  <% end %>
+              </li>
+              
+          </ul>
+
+          
+      </div>
+  </nav>
+<div class="container-fluid">
+  <p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @receipt.member.name %>
+  <a href="/members/<%=@receipt.member_id%>" class="ml-3">View this member</a>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @receipt.number %>
+</p>
+
+<p>
+  <strong>Donation year:</strong>
+  <%= @receipt.donation_year %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @receipt.amount %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @receipt.description %>
+</p>
+
+   <div class="row m-3">
+        <a target="_blank" href="/receipts/<%=@receipt.id%>.pdf"  >Show PDF  </a>
+        <a href="/receipts" class="ml-3 text-success">View all receipts </a>
+        
+        </div>
+
+</div>

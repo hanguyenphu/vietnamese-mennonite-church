@@ -1,0 +1,48 @@
+<%= form_with(model: receipt, local: true) do |form| %>
+  <% if receipt.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(receipt.errors.count, "error") %> prohibited this receipt from being saved:</h2>
+
+      <ul>
+        <% receipt.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+    <%= form.label :member_id %>  <a href="/members/<%=@receipt.member_id%>" class="ml-3">View this member</a>
+    <%= form.text_field :member_name, value: @receipt.member.name, :readonly => true, class:"form-control"%>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :number %>
+    <%= form.number_field :number, class:"form-control", :required => true  %>
+  </div>
+
+  <div class="field">
+    <%= form.label :donation_year %>
+    <%= form.number_field :donation_year, class:"form-control", :required => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount %>
+    <%= form.text_field :amount, class:"form-control", :required => true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, class:"form-control " %>
+  </div>
+
+  <div class="field">
+    <%# <%= form.label :member_id %>
+    <%= form.hidden_field :member_id, class:"form-control"%>
+  </div>
+
+  <div class="actions">
+    <%= form.submit  class:"btn btn-primary mt-3" %>
+  </div>
+<% end %>

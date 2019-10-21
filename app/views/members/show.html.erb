@@ -1,0 +1,137 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/"><h5>Vietnamese Menonite Church</h5></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/members">Member</a>
+                </li>
+                <li class="nav-item mr-5">
+                    <a class="nav-link" href="/receipts">Receipts</a>
+                </li>
+
+                <li class="nav-item">
+                    <%if signed_in?%>
+                    <%= button_to "Sign out", sign_out_path, method: :delete, class: "btn btn-secondary"%>
+                    <% end %>
+                </li>
+            </ul>
+        </div>
+    </nav>
+<div class="container-fluid">
+    <h1>Members</h1>
+  <div class="row">
+    <div class="col-md-6">
+        <p class="text-success" id="notice"><%= notice %></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= @member.name %>   <%= link_to 'Edit', edit_member_path(@member), class: "pl-3" %> </h5>
+      <p class="card-text">Address: <%= @member.address %></p>
+      <p class="card-text">Phone: <%= @member.phone %></p>
+        <%= link_to '< Back', members_path %>
+    </div>
+  </div>
+  <div>
+
+    <div class="row col-md-12">
+        <div class="col-md-5">
+          <h4>Create New Receipt</h4>
+          <%= form_with(model: [ @member, @member.receipts.build ], local: true) do |form| %>
+
+            <div class="field">
+              <%= form.label :member %>
+              <%= form.text_field :number, class:"form-control", value: @member.name, :readonly => true  %>
+            </div>
+          
+            <div class="field">
+              <%= form.label :number %>
+              <%= form.number_field :number, class:"form-control", value: @new_receipt_number, :required => true  %>
+            </div>
+
+            <div class="field">
+              <%= form.label :donation_year %>
+              <%= form.number_field :donation_year, class:"form-control", value: Time.current.year - 1, :required => true %>
+            </div>
+
+            <div class="field">
+              <%= form.label :amount %>
+              <%= form.text_field :amount, class:"form-control", :required => true %>
+            </div>
+
+            <div class="field">
+              <%= form.label :description %>
+              <%= form.text_area :description, class:"form-control" %>
+            </div>
+
+            <div class="field">
+              <%# <%= form.label :member_id %> 
+              <%= form.hidden_field :member_id, value: @member.id, class:"form-control"%>
+            </div>
+
+            <div class="actions mt-3">
+              <%= form.submit  class:"btn btn-primary" %>
+            </div>
+          <% end %>
+      </div>
+      <div class="col-md-7">
+      <h4>Receipt List</h4>
+      <table class="table table-striped">
+      <thead lass="thread-dark">
+        <tr>
+          <th scope="col">Number</th>
+          <th scope="col">Donation year</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Description</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @receipts.each do |receipt| %>
+          <tr>
+            <td><%= receipt.number %></td>
+            <td><%= receipt.donation_year %></td>
+            <td><%= receipt.amount %></td>
+            <td><%= receipt.description %></td>
+            <td><a class= "btn btn-outline-primary" target="_blank" href="/receipts/<%=receipt.id%>.pdf">Show PDF</a></td>
+            <td><%= link_to 'Edit', edit_receipt_path(receipt), class: "btn btn-outline-success" %></td>
+            <td><%= link_to 'Delete', receipt, method: :delete, class: "btn btn-outline-danger", data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if @receipts.size == 0 %>
+    <div class="row col-md-12 mt-5">
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-8">
+              <p class="text-danger">There is no receipt found!</p>
+            </div>
+      </div>
+    <% end %>
+    <br>
+
+              
+   
+<%# <%= link_to 'New Receipt', new_receipt_path %> 
+  <div class="row col-md-12 mt-5">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-8">
+        <%== pagy_bootstrap_nav(@pagy) %>
+    </div>
+  </div>
+</div>
+  </div>
+
+      </div>
+  </div>
+  
+  

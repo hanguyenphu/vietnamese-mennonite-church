@@ -1,0 +1,100 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/"><h5>Vietnamese Menonite Church</h5></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="collapse navbar-collapse " id="navbarNav">
+            <ul class="navbar-nav ">
+                <li class="nav-item ">
+                    <a class="nav-link" href="/">Home </a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/members">Member</a>
+                </li>
+                <li class="nav-item active mr-5">
+                    <a class="nav-link" href="/receipts">Receipts</a>
+                </li>
+
+                <li class="nav-item">
+                    <%if signed_in?%>
+                    <%= button_to "Sign out", sign_out_path, method: :delete, class: "btn btn-secondary"%>
+                    <% end %>
+                </li>
+                
+            </ul>
+
+            
+        </div>
+    </nav>
+    <div class="container-fluid">
+<p id="notice"><%= notice %></p>
+
+<h1>Receipts</h1>
+
+<div class="row col-md-12 mt-5">
+      <%if params[:member_name].present?%>
+        <div class="col-md-6 mb-3">
+             <a href="/receipts"> < Back </a>
+        </div>
+         <% end %>
+        <div class="col-md-6">
+            <form class="form-inline my-2 my-lg-0" method="get" accept-charset="UTF-8" action="/receipts" >
+                <input class="form-control mr-sm-2"  name="member_name" id="member_name" required type="search" placeholder="Name" aria-label="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+        </div>
+  </div>
+<br>
+
+
+<table class="table table-striped">
+  <thead lass="thread-dark">
+    <tr>
+      <th scope="col">Number</th>
+      <th scope="col">Donation year</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Description</th>
+      <th scope="col">Member</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @receipts.each do |receipt| %>
+      <tr>
+        <td><%= receipt.number %></td>
+        <td><%= receipt.donation_year %></td>
+        <td><%= receipt.amount %></td>
+        <td><%= receipt.description %></td>
+        <td><%= receipt.member.name %></td>
+        <td><a class= "btn btn-outline-primary" target="_blank" href="/receipts/<%=receipt.id%>.pdf">Show PDF</a></td>
+        <td><%= link_to 'Edit', edit_receipt_path(receipt), class: "btn btn-outline-success" %></td>
+        <%# <td><%= link_to 'Delete', receipt, method: :delete, class: "btn btn-outline-danger", data: { confirm: 'Are you sure?' } %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+ <% if @receipts.size == 0 %>
+<div class="row col-md-12 mt-5">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+          <p class="text-danger">There is no receipt found!</p>
+        </div>
+  </div>
+<% end %>
+<br>
+
+              
+   
+<%# <%= link_to 'New Receipt', new_receipt_path %> 
+<div class="row col-md-12 mt-5">
+
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-8">
+       
+          <%== pagy_bootstrap_nav(@pagy) %>
+        </div>
+  </div>
+</div>
