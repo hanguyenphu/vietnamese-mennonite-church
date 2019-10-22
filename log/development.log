@@ -33900,3 +33900,275 @@ Processing by MembersController#show as HTML
 Completed 200 OK in 22ms (Views: 14.8ms | ActiveRecord: 0.6ms | Allocations: 23335)
 
 
+Started GET "/members" for ::1 at 2019-10-21 20:14:01 -0500
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by MembersController#index as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "43f352a0c8e697b645e95ad4e47eb595b86c8788"], ["LIMIT", 1]]
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT COUNT(*) FROM "members"[0m
+  ↳ app/controllers/members_controller.rb:11:in `index'
+  Rendering members/index.html.erb within layouts/application
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" LIMIT ? OFFSET ?[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  ↳ app/views/members/index.html.erb:64
+  Rendered members/index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 3087)
+Completed 200 OK in 18ms (Views: 14.8ms | ActiveRecord: 1.3ms | Allocations: 19462)
+
+
+Started DELETE "/sign_out" for ::1 at 2019-10-21 20:14:02 -0500
+Processing by Clearance::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "43f352a0c8e697b645e95ad4e47eb595b86c8788"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "remember_token" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["updated_at", "2019-10-22 01:14:02.733201"], ["id", 1]]
+  [1m[35m (8.0ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/sign_in
+Completed 302 Found in 12ms (ActiveRecord: 8.4ms | Allocations: 5462)
+
+
+Started GET "/sign_in" for ::1 at 2019-10-21 20:14:02 -0500
+Processing by Clearance::SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/_form.html.erb (Duration: 0.5ms | Allocations: 506)
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 601)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms | Allocations: 15065)
+
+
+Started POST "/session" for ::1 at 2019-10-21 20:14:04 -0500
+Processing by Clearance::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "session"=>{"email"=>"hanguyen.wnp@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "hanguyen.wnp@gmail.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 177ms (ActiveRecord: 0.1ms | Allocations: 1497)
+
+
+Started GET "/" for ::1 at 2019-10-21 20:14:04 -0500
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 162)
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.1ms | Allocations: 15916)
+
+
+Started GET "/members" for ::1 at 2019-10-21 20:14:10 -0500
+Processing by MembersController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "members"[0m
+  ↳ app/controllers/members_controller.rb:11:in `index'
+  Rendering members/index.html.erb within layouts/application
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" LIMIT ? OFFSET ?[0m  [["LIMIT", 15], ["OFFSET", 0]]
+  ↳ app/views/members/index.html.erb:64
+  Rendered members/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 3068)
+Completed 200 OK in 13ms (Views: 11.1ms | ActiveRecord: 0.3ms | Allocations: 19438)
+
+
+Started GET "/members?name=Ha+Nguyen" for ::1 at 2019-10-21 20:14:15 -0500
+Processing by MembersController#index as HTML
+  Parameters: {"name"=>"Ha Nguyen"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "members" WHERE (name LIKE '%Ha Nguyen%')[0m
+  ↳ app/controllers/members_controller.rb:9:in `index'
+  Rendering members/index.html.erb within layouts/application
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE (name LIKE '%Ha Nguyen%') LIMIT ? OFFSET ?[0m  [["LIMIT", 1], ["OFFSET", 0]]
+  ↳ app/views/members/index.html.erb:64
+  Rendered members/index.html.erb within layouts/application (Duration: 1.0ms | Allocations: 1028)
+Completed 200 OK in 11ms (Views: 9.1ms | ActiveRecord: 0.3ms | Allocations: 17433)
+
+
+Started GET "/members/104" for ::1 at 2019-10-21 20:14:21 -0500
+Processing by MembersController#show as HTML
+  Parameters: {"id"=>"104"}
+  [1m[36mMember Load (0.2ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/controllers/members_controller.rb:84:in `set_member'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT MAX("receipts"."number") FROM "receipts"[0m
+  ↳ app/controllers/members_controller.rb:19:in `show'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("receipts"."number") FROM "receipts"[0m
+  ↳ app/controllers/members_controller.rb:22:in `show'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "receipts" WHERE "receipts"."member_id" = ?[0m  [["member_id", 104]]
+  ↳ app/controllers/members_controller.rb:24:in `show'
+  Rendering members/show.html.erb within layouts/application
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."member_id" = ? ORDER BY "receipts"."number" DESC LIMIT ? OFFSET ?[0m  [["member_id", 104], ["LIMIT", 1], ["OFFSET", 0]]
+  ↳ app/views/members/show.html.erb:97
+  Rendered members/show.html.erb within layouts/application (Duration: 2.6ms | Allocations: 2492)
+Completed 200 OK in 39ms (Views: 10.8ms | ActiveRecord: 0.6ms | Allocations: 20582)
+
+
+Started POST "/members/104/receipts" for ::1 at 2019-10-21 20:14:48 -0500
+Processing by ReceiptsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "receipt"=>{"number"=>"201894", "donation_year"=>"2018", "amount"=>"4000.00", "description"=>"Donation 2018", "member_id"=>"104"}, "commit"=>"Create Receipt", "member_id"=>"104"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/receipts_controller.rb:58:in `block in create'
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:58:in `block in create'
+  [1m[36mReceipt Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "receipts" WHERE "receipts"."number" = ? LIMIT ?[0m  [["number", 201894], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:58:in `block in create'
+  [1m[36mReceipt Create (0.2ms)[0m  [1m[32mINSERT INTO "receipts" ("number", "donation_year", "amount", "description", "member_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["number", 201894], ["donation_year", 2018], ["amount", 4000.0], ["description", "Donation 2018"], ["member_id", 104], ["created_at", "2019-10-22 01:14:48.493513"], ["updated_at", "2019-10-22 01:14:48.493513"]]
+  ↳ app/controllers/receipts_controller.rb:58:in `block in create'
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/receipts_controller.rb:58:in `block in create'
+Redirected to http://localhost:3000/members/104
+Completed 302 Found in 6ms (ActiveRecord: 1.1ms | Allocations: 6093)
+
+
+Started GET "/members/104" for ::1 at 2019-10-21 20:14:48 -0500
+Processing by MembersController#show as HTML
+  Parameters: {"id"=>"104"}
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/controllers/members_controller.rb:84:in `set_member'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT MAX("receipts"."number") FROM "receipts"[0m
+  ↳ app/controllers/members_controller.rb:19:in `show'
+  [1m[35mCACHE  (0.0ms)[0m  [1m[34mSELECT MAX("receipts"."number") FROM "receipts"[0m
+  ↳ app/controllers/members_controller.rb:22:in `show'
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "receipts" WHERE "receipts"."member_id" = ?[0m  [["member_id", 104]]
+  ↳ app/controllers/members_controller.rb:24:in `show'
+  Rendering members/show.html.erb within layouts/application
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."member_id" = ? ORDER BY "receipts"."number" DESC LIMIT ? OFFSET ?[0m  [["member_id", 104], ["LIMIT", 2], ["OFFSET", 0]]
+  ↳ app/views/members/show.html.erb:97
+  Rendered members/show.html.erb within layouts/application (Duration: 2.4ms | Allocations: 2586)
+Completed 200 OK in 14ms (Views: 10.5ms | ActiveRecord: 0.3ms | Allocations: 20670)
+
+
+Started GET "/receipts/27.pdf" for ::1 at 2019-10-21 20:14:50 -0500
+Processing by ReceiptsController#show as PDF
+  Parameters: {"id"=>"27"}
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:97:in `set_receipt'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[36mCACHE Receipt Load (0.0ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:27:in `show'
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/pdfs/receipt_pdf.rb:79:in `receipt_table'
+  Rendering text template
+  Rendered text template (Duration: 0.0ms | Allocations: 1)
+Sent data Receipt_201894.pdf (1.3ms)
+Completed 200 OK in 42ms (Views: 1.1ms | ActiveRecord: 0.3ms | Allocations: 87813)
+
+
+Started GET "/receipts/27/edit" for ::1 at 2019-10-21 20:15:03 -0500
+Processing by ReceiptsController#edit as HTML
+  Parameters: {"id"=>"27"}
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:97:in `set_receipt'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  Rendering receipts/edit.html.erb within layouts/application
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/views/receipts/_form.html.erb:16
+  Rendered receipts/_form.html.erb (Duration: 2.8ms | Allocations: 2673)
+  Rendered receipts/edit.html.erb within layouts/application (Duration: 9.2ms | Allocations: 3247)
+Completed 200 OK in 19ms (Views: 17.2ms | ActiveRecord: 0.2ms | Allocations: 19650)
+
+
+Started PATCH "/receipts/27" for ::1 at 2019-10-21 20:15:09 -0500
+Processing by ReceiptsController#update as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "receipt"=>{"member_name"=>"Ha Nguyen", "number"=>"201894", "donation_year"=>"2018", "amount"=>"4300", "description"=>"Donation 2018", "member_id"=>"104"}, "commit"=>"Update Receipt", "id"=>"27"}
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:97:in `set_receipt'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+[31mUnpermitted parameter: :member_name[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/receipts_controller.rb:73:in `block in update'
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:73:in `block in update'
+  [1m[36mReceipt Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "receipts" WHERE "receipts"."number" = ? AND "receipts"."id" != ? LIMIT ?[0m  [["number", 201894], ["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:73:in `block in update'
+  [1m[36mReceipt Update (0.2ms)[0m  [1m[33mUPDATE "receipts" SET "amount" = ?, "updated_at" = ? WHERE "receipts"."id" = ?[0m  [["amount", 4300.0], ["updated_at", "2019-10-22 01:15:09.628611"], ["id", 27]]
+  ↳ app/controllers/receipts_controller.rb:73:in `block in update'
+  [1m[35m (0.5ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/receipts_controller.rb:73:in `block in update'
+Redirected to http://localhost:3000/receipts/27
+Completed 302 Found in 6ms (ActiveRecord: 1.0ms | Allocations: 6737)
+
+
+Started GET "/receipts/27" for ::1 at 2019-10-21 20:15:09 -0500
+Processing by ReceiptsController#show as HTML
+  Parameters: {"id"=>"27"}
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:97:in `set_receipt'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[36mCACHE Receipt Load (0.0ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:27:in `show'
+  Rendering receipts/show.html.erb within layouts/application
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/views/receipts/show.html.erb:34
+  Rendered receipts/show.html.erb within layouts/application (Duration: 1.3ms | Allocations: 1203)
+Completed 200 OK in 11ms (Views: 8.9ms | ActiveRecord: 0.2ms | Allocations: 18074)
+
+
+Started GET "/receipts/27.pdf" for ::1 at 2019-10-21 20:15:11 -0500
+Processing by ReceiptsController#show as PDF
+  Parameters: {"id"=>"27"}
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:97:in `set_receipt'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[36mCACHE Receipt Load (0.0ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" WHERE "receipts"."id" = ? LIMIT ?[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/controllers/receipts_controller.rb:27:in `show'
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/pdfs/receipt_pdf.rb:79:in `receipt_table'
+  Rendering text template
+  Rendered text template (Duration: 0.0ms | Allocations: 1)
+Sent data Receipt_201894.pdf (0.4ms)
+Completed 200 OK in 35ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 84652)
+
+
+Started DELETE "/sign_out" for ::1 at 2019-10-21 20:15:18 -0500
+Processing by Clearance::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "1da97e0eca9686e7b8692046c305558f3bbec418"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mUser Update (0.3ms)[0m  [1m[33mUPDATE "users" SET "remember_token" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["remember_token", "0a742c8b15933945edc24072438d8d93d6408c67"], ["updated_at", "2019-10-22 01:15:18.817896"], ["id", 1]]
+  [1m[35m (5.9ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/sign_in
+Completed 302 Found in 10ms (ActiveRecord: 6.3ms | Allocations: 5320)
+
+
+Started GET "/sign_in" for ::1 at 2019-10-21 20:15:18 -0500
+Processing by Clearance::SessionsController#new as HTML
+  Rendering sessions/new.html.erb within layouts/application
+  Rendered sessions/_form.html.erb (Duration: 0.5ms | Allocations: 505)
+  Rendered sessions/new.html.erb within layouts/application (Duration: 0.7ms | Allocations: 600)
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms | Allocations: 15063)
+
+
+Started POST "/session" for ::1 at 2019-10-21 20:15:20 -0500
+Processing by Clearance::SessionsController#create as HTML
+  Parameters: {"authenticity_token"=>"[FILTERED]", "session"=>{"email"=>"hanguyen.wnp@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "hanguyen.wnp@gmail.com"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 177ms (ActiveRecord: 0.1ms | Allocations: 1478)
+
+
+Started GET "/" for ::1 at 2019-10-21 20:15:20 -0500
+Processing by WelcomeController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "0a742c8b15933945edc24072438d8d93d6408c67"], ["LIMIT", 1]]
+  Rendering welcome/index.html.erb within layouts/application
+  Rendered welcome/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 162)
+Completed 200 OK in 10ms (Views: 8.4ms | ActiveRecord: 0.1ms | Allocations: 15912)
+
+
+Started GET "/receipts" for ::1 at 2019-10-21 20:15:24 -0500
+Processing by ReceiptsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "0a742c8b15933945edc24072438d8d93d6408c67"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "receipts"[0m
+  ↳ app/controllers/receipts_controller.rb:18:in `index'
+  Rendering receipts/index.html.erb within layouts/application
+  [1m[36mReceipt Load (0.3ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" ORDER BY "receipts"."number" DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 7], ["OFFSET", 0]]
+  ↳ app/views/receipts/index.html.erb:63
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  Rendered receipts/index.html.erb within layouts/application (Duration: 6.3ms | Allocations: 5777)
+Completed 200 OK in 35ms (Views: 32.2ms | ActiveRecord: 0.7ms | Allocations: 22159)
+
+
