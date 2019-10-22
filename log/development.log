@@ -34172,3 +34172,30 @@ Processing by ReceiptsController#index as HTML
 Completed 200 OK in 35ms (Views: 32.2ms | ActiveRecord: 0.7ms | Allocations: 22159)
 
 
+Started GET "/receipts" for ::1 at 2019-10-21 20:24:11 -0500
+  [1m[35m (0.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by ReceiptsController#index as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."remember_token" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["remember_token", "0a742c8b15933945edc24072438d8d93d6408c67"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT COUNT(*) FROM "receipts"[0m
+  ↳ app/controllers/receipts_controller.rb:18:in `index'
+  Rendering receipts/index.html.erb within layouts/application
+  [1m[36mReceipt Load (0.1ms)[0m  [1m[34mSELECT "receipts".* FROM "receipts" ORDER BY "receipts"."number" DESC LIMIT ? OFFSET ?[0m  [["LIMIT", 7], ["OFFSET", 0]]
+  ↳ app/views/receipts/index.html.erb:63
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mMember Load (0.1ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mCACHE Member Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 104], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  [1m[36mMember Load (0.0ms)[0m  [1m[34mSELECT "members".* FROM "members" WHERE "members"."id" = ? LIMIT ?[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/views/receipts/index.html.erb:69
+  Rendered receipts/index.html.erb within layouts/application (Duration: 4.7ms | Allocations: 5787)
+Completed 200 OK in 15ms (Views: 12.3ms | ActiveRecord: 0.5ms | Allocations: 22186)
+
+

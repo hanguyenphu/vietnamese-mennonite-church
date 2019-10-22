@@ -52,10 +52,10 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :production do 
+group :production, :test do 
   gem 'pg', '~> 0.18.4'
 end
-
+``
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
