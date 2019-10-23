@@ -5,8 +5,11 @@ class MembersController < ApplicationController
   # GET /members.json
   before_action :require_login
   def index
+    @name = ""
+    @name = params[:name].downcase unless params[:name] == nil
+     
     @pagy, @members = if params[:name] 
-                          pagy(Member.where('name LIKE ?', "%#{params[:name]}%"), items: 15)      
+                          pagy(Member.where('lower(name) LIKE ?', "%#{@name}%"), items: 15)      
                       else               
                         pagy(Member.all, items: 15)
                       end
