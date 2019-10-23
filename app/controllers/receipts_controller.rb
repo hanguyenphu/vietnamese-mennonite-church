@@ -7,7 +7,7 @@ class ReceiptsController < ApplicationController
   def index
     @pagy, @receipts = if params[:member_name] 
                             @all_receipt = []
-                            @members = Member.where('name Like ?', "%#{params[:member_name]}%" )
+                            @members = Member.where('lower(name) Like ?', "%#{params[:member_name].downcase}%" )
                             if(@members.size >= 1)
                               pagy(@members.first.receipts.all.order(number: :desc), items: 15)
                             else 
@@ -99,6 +99,6 @@ class ReceiptsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def receipt_params
-      params.require(:receipt).permit(:number, :donation_year, :amount, :description, :member_id)
+      params.require(:receipt).permit(:number, :donation_year, :amount, :description, :member_id, :member_name)
     end
 end
