@@ -6,18 +6,28 @@ class ReceiptsController < ApplicationController
   before_action :require_login
   def index
     @pagy, @receipts = if params[:member_name] 
-                            @all_receipt = []
-                            @members = Member.where('lower(name) Like ?', "%#{params[:member_name].downcase}%" )
-                            if(@members.size >= 1)
-                              pagy(@members.first.receipts.all.order(number: :desc), items: 15)
-                            else 
-                              pagy(Receipt.where('member_id = 0'))
-                            end
+                  @all_receipt = []
+                  @members = Member.where('lower(name) Like ?', "%#{params[:member_name].downcase}%" )
+                  if(@members.size >= 1)
+                    pagy(@members.first.receipts.all.order(number: :desc), items: 15)
+                  else 
+                    pagy(Receipt.where('member_id = 0'))
+                  end
 
-                        else               
-                          pagy(Receipt.all.order(number: :desc), items: 15)
-                        end
-    
+              else               
+                pagy(Receipt.all.order(number: :desc), items: 15)
+             
+              end
+     @years = Receipt.order(donation_year: :desc).distinct.pluck(:donation_year)
+     @number_of_receipt = Hash.new
+     @total_amount_each_year_array= Hash.new
+     @years.each {
+        |year| @year_receipts = Receipt.where(:donation_year => year )
+        @total_amount_each_year =  @year_receipts.map(&:amount).sum
+        @total_receipts_each_year = @year_receipts.count
+        @number_of_receipt[year] = @total_receipts_each_year
+        @total_amount_each_year_array[year] = @total_amount_each_year
+     }         
   end
 
   # GET /receipts/1
@@ -70,6 +80,7 @@ class ReceiptsController < ApplicationController
   before_action :require_login
   def update
     respond_to do |format|
+     
       if @receipt.update(receipt_params)
         format.html { redirect_to @receipt, notice: 'Receipt was successfully updated.' }
         format.json { render :show, status: :ok, location: @receipt }
