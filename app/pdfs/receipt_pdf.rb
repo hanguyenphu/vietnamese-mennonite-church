@@ -60,7 +60,7 @@ class ReceiptPdf < Prawn::Document
         like to sincerely thank you for your generous donation."]] + 
         [["Nguyện xin Chúa ban phước dư dật trên quý vị và gia
         quyến!", "May God bless you and your family!"]] + [["Thay Mặt Hội Thánh ", ""]] +
-        [["Tâm Nguyễn", "Tam Nguyen"]] +
+        [["Hoa Lê", "Hoa Le"]] +
         [["Thủ Quỹ", "Church Treasurer"]] + [["",""]]
      
     end
@@ -87,7 +87,7 @@ class ReceiptPdf < Prawn::Document
     def signature
         text_box "Authorized Signature: ", size: 9, :at => [250, 350]
         image "public/images/signature.jpg", :at => [370, 380], :scale => 0.07
-        text_box "Tam Nguyen, Treasurer ", size: 9, :at => [370, 315]
+        text_box "Hoa Le, Treasurer ", size: 9, :at => [370, 315]
     end
    
     def footer
