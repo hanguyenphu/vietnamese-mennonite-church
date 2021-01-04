@@ -27,7 +27,7 @@ class ReceiptPdf < Prawn::Document
         receipt_detail
         text_box "Authorized Signature: ", size: 9, :at => [250, 80]
         image "public/images/signature.jpg", :at => [370, 110], :scale => 0.07
-        text_box "Tam Nguyen, Treasurer ", size: 9, :at => [370, 45]
+        text_box "Hoa Le, Treasurer ", size: 9, :at => [370, 45]
         footer
        
     end
